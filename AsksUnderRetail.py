@@ -5,7 +5,7 @@ stockx = Stockx()
 while True:
     sneaker = input('What are you looking for?:')
     if sneaker == "":
-        print('Invalid Input')
+        print('Invalid Input. Please try again.')
         break
 
     productId = stockx.get_first_product_id('{}'.format(sneaker))
