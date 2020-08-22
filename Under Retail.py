@@ -14,11 +14,11 @@ while True:
     prices = stockx.get_asks(productId)
     print("{} - ${}".format(product.title, product.retail_price))
     print()
-    mylist = []
+    res = []
 
     for price in prices:
         if product.retail_price >= price.order_price:
-            mylist.append(price)
+            res.append(price)
             margin = product.retail_price - price.order_price
             if margin != 0:
                 price_diff = '${} Under Retail'.format(margin)
@@ -27,6 +27,6 @@ while True:
             print("Size: {} ${} ({})".format(price.shoe_size, price.order_price, price_diff))
             print('=====================================')
             
-    if not mylist:
+    if not res:
         print('No Shoes Under Retail!')
         print()
