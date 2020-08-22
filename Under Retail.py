@@ -16,15 +16,17 @@ while True:
     print()
     mylist = []
 
-    for ask in prices:
-        if product.retail_price >= ask.order_price:
-            mylist.append(ask)
-            if product.retail_price-ask.order_price == 0:
-                price_diff = "At Retail"
+    for price in prices:
+        if product.retail_price >= price.order_price:
+            mylist.append(price)
+            margin = product.retail_price - price.order_price
+            if margin != 0:
+                price_diff = '${} Under Retail'.format(margin)
             else:
-                price_diff = '${} Under Retail'.format(product.retail_price-ask.order_price)
-            print("Size: {} ${} ({})".format(ask.shoe_size, ask.order_price, price_diff))
+                price_diff = "At Retail"
+            print("Size: {} ${} ({})".format(price.shoe_size, price.order_price, price_diff))
             print('=====================================')
+            
     if not mylist:
         print('No Shoes Under Retail!')
         print()
