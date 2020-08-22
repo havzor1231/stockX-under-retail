@@ -3,28 +3,28 @@ from stockxsdk import Stockx
 stockx = Stockx()
 
 while True:
-    item = input('What are you looking for?:')
-    if item == "":
-        print('Program Ended')
+    sneaker = input('What are you looking for?:')
+    if sneaker == "":
+        print('Invalid Input')
         break
 
-    product_id = stockx.get_first_product_id('{}'.format(item))
-    product = stockx.get_product(product_id)
+    productId = stockx.get_first_product_id('{}'.format(sneaker))
+    product = stockx.get_product(productId)
     print()
-    asks = stockx.get_asks(product_id)
+    prices = stockx.get_asks(productId)
     print("{} - ${}".format(product.title, product.retail_price))
     print()
     mylist = []
 
-    for ask in asks:
+    for ask in prices:
         if product.retail_price >= ask.order_price:
             mylist.append(ask)
             if product.retail_price-ask.order_price == 0:
-                underr = "At Retail"
+                price_diff = "At Retail"
             else:
-                underr = '${} Under Retail'.format(product.retail_price-ask.order_price)
-            print("Size: {} ${} ({})".format(ask.shoe_size, ask.order_price, underr))
-            print('----------------------------------------')
+                price_diff = '${} Under Retail'.format(product.retail_price-ask.order_price)
+            print("Size: {} ${} ({})".format(ask.shoe_size, ask.order_price, price_diff))
+            print('=====================================')
     if not mylist:
-        print('No Asks Under Retail')
+        print('No Shoes Under Retail!')
         print()
